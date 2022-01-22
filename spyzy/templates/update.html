@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<div class="container">
+  <h2>Update Recipies</h2>
+  <p>{{ recipie.recipieurl }}</p>
+  <form action="/update" class="was-validated" method="POST">
+  {% csrf_token %}
+    <div class="form-group">
+      <label for="uname">URL</label>
+      <input type="text" class="form-control" id="recipieurl" placeholder="Enter Recipie Title" name="recipieurl" value="{{recipie.recipieurl}}" readonly/>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="uname">Title:</label>
+      <input type="text" class="form-control" id="title" placeholder="Enter Recipie Title" name="title" value="{{recipie.title}}" required/>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+      <input type="text" id="recipiepk" name="recipiepk" value="{{recipie.pk}}" readonly/>
+    <div class="form-group">
+      <label for="pwd">Description:</label>
+      <textarea class="form-control" id="des" placeholder="Enter Recipie description" name="des" required rows="4" cols="50">{{ recipie.description }}</textarea>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+{% endblock %}

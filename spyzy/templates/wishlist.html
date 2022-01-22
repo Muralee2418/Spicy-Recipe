@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<div class="row">
+<div class="col" >
+<h1 style="font-family:Lato thin; font-weight:10">Spicy Recipies</h1>
+</div>
+<div class="col" > 
+{% if user.is_authenticated %}
+<div class="col" style="padding:5px">
+<p>Hello {{user.username}}</p>
+</div>
+<div class="col" style="padding:5px">
+<a  href="accounts/logout">Logout</a>
+</div>
+<div class="col" style="padding:5px">
+<a  href="accounts/wishlist">Wishlist</a>
+</div>
+{% else %}
+<a href="accounts/register">Register</a>
+<a href="accounts/login">Login</a>
+{% endif %}
+</div> 
+</div>
+<hr>
+<br>
+<br>
+<div>
+{% if user.is_authenticated %}
+<div class="container">
+  <h2>Your Wishlist</h2>
+  <ul class="list-group">
+{% for recipie in wishlist %}
+<li class="list-group-item"><img src="{{ recipie.imageurl }}" class="img-rounded" alt="Cinque Terre" width="80" height="80"> {{ recipie.title }} <a href="{% url 'recipie_details' recipie.pk %}" class="btn btn-primary" style="float:right">Read More</a></li>
+
+{% endfor %}
+</ul>
+</div>
+{% else %}
+<h4>Login or Register to view your whishlist</h4>
+<a href="accounts/register">Register</a>
+<a href="accounts/login">Login</a>
+{% endif %}
+</div>
+{% endblock %}

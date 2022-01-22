@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<div class="title-row">
+<h1 style="font-family:Lato thin; font-weight:10">Spicy Recipies</h1>
+<div> 
+{% if user.is_authenticated %}
+<p>Hello {{user.username}}</p>
+<a href="accounts/logout">Logout</a>
+<a href="accounts/wishlist">Wishlist</a>
+<a href="create">Create Recipie</a>
+<a href="myrecipies">My Recipies</a>
+{% else %}
+<a href="accounts/register">Register</a>
+<a href="accounts/login">Login</a>
+{% endif %}
+</div> 
+</div>
+<hr>
+<br>
+<br>
+<div class="row">
+{% for recipie in recipies %}
+<div class="col-md-4 emboss">
+        <div class="card mb-2">
+            <img class="card-img-top" src="{{ recipie.imageurl }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ recipie.title }}</h5>
+                <p class="card-text">{{ recipie.description }}</p>
+                <a href="{% url 'recipie_details' recipie.pk %}"
+                   class="btn btn-primary">
+                    Read More
+                </a>
+                <a class="likebutton" id="like{{recipie.pk}}" data-catid="{{ recipie.pk }}" href="#">
+                    Like
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<h1 id="message"></h1>
+</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    $('.likebutton').click(function(){
+    var catid;
+    catid = $(this).attr("data-catid");
+    $.ajax(
+    {
+        type:"GET",
+        url: "{% url 'likedrecipies' %}",
+        data:{
+                 recipie_id: catid
+        },
+        success: function( data ) 
+        {
+            $( '#like'+ catid ).remove();
+            $( '#message' ).text(data);
+        }
+     })
+});
+</script>
+{% endblock %}
