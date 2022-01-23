@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{%load crispy_forms_tags %} 
 {% block page_content %}
 <h1>{{ recipie.title }}</h1>
 <div class="row">
@@ -11,29 +12,25 @@
         <p>{{ recipie.description }}</p>
         <br>
         <h5>Added By</h5>     
-        <div class="row"><div class="col-md-4"><img src="{%  static  'avatar.png'  %}" class="rounded-circle" alt="Cinque Terre" width="50" height="50"></div>
-        <div class="col-md-4"><div class="row"><h7>{{recipie.author.username}}</h7></div>
-        </div> </div>
+        <div class="row"><div class="col-md-4"><img src="{%  static  'avatar.png'  %}" class="rounded-circle" alt="Cinque Terre" width="50" height="50"> {{recipie.author.username}}</div>
+        <div class="col-md-4"><h7></h7></div>
+         </div>
         
         
     </div>
 </div>
-<div class="row">
+<div class="row" style="padding-left:5%;margin-top:3%;">
 <h7>Add comments</h7>
-<form method="POST" width="100%">
-    
-    <div class="form-group">
-    {{ form.as_p }}
-    {% csrf_token %}
-    
-    </div>
-    
+<br>
+<form method="POST"> 
+    {% csrf_token %} 
+    {{ form|crispy }} 
     <button type="submit" class="btn btn-primary">Post Comment</button>
 </div>
 <p>Comments</p>
 <hr>
 {% for comment in comments%}
-<div class="row">
+<div class="row" style="padding-left:5%">
     <div class="col-md-8">
         <p>{{comment.comment_info}}</p>
         <p style="font-size:10px"> posted on: {{comment.comment_date}}</p>

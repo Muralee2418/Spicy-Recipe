@@ -6,6 +6,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
 .emboss {
   width: auto;
@@ -17,11 +20,64 @@
   margin-bottom: 20px;
   display: block;
 }
+.nav navbar-nav navbar-right ul{
+  list-style-type:none;
+}
+.menu{
+  text-align:center;
+  margin-left:60%;
+
+}
+.topnavbar{
+
+  list-style-type:none;
+  float:right; 
+  padding:0px;
+  height:auto;
+  margin-bottom:0px;
+
+}
+.topnavbar li{
+  display:inline-block;
+}
+.topnavbar li a{
+  text-decoration:none;
+  padding:5px;
+}
+
+.topnavbar li a:hover{
+  background-color:black;
+  color:white;
+}
 
 </style>
 </head>
 <body>
-<div class="container">
+<nav class="navbar navbar-inverse" style="padding:0px">
+  <div class="container-fluid" style="justify-content:flex-start">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="home">Spicy Recipes</a>
+    </div>
+    
+    <div class="menu">
+    <ul class="topnavbar" id="navbarlist">
+    {% if user.is_authenticated %}
+      <li><p style="color:white">Hello {{user.username}}</p></li>
+      <li><a href="accounts/logout">Logout</a></li>
+      <li><a href="accounts/wishlist">Wishlist</a></li>
+      <li><a href="create">Add Recipie</a></li>
+      <li><a href="myrecipies">My Recipies</a></li>
+    {% else %}
+      <li><a href="accounts/register">Register</a></li>
+      <li><a href="accounts/login">Login</a></li>
+    {% endif %}
+    
+    </ul>
+    </div>
+  </div>
+</nav>
+
+<hr>
     {% block page_content %}{% endblock %}
 </div>
 </body>

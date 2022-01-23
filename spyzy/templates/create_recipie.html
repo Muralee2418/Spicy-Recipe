@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
+{%load crispy_forms_tags %} 
 {% block page_content %}
-<form method="POST" class="post-form" enctype='multipart/form-data'>  
+<div class="container" >
+  <h2>My Recipes</h2>
+  <p>Add your favourite Recipes from Times of India </p>
+  <hr>
+</div>
+<div style="padding-left:10%">
+<form method="POST" class="post-form" enctype='multipart/form-data' style="width:50%">  
         {% csrf_token %}  
-        {{ form.as_p}}  
-        <button type="submit" class="save btn btn-default">Create</button>  
+        {{ form|crispy}}  
+        <button type="submit" class="save btn btn-primary">Create</button>  
 </form>
+</div>
 {% endblock %}

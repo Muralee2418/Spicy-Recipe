@@ -84,14 +84,25 @@ def update_recipies(request):
     return redirect("recipies_index")
 
 def delete_recipies(request):
-    print("inside delete recipies")
+    if request.method=="POST":
+        recipie_pk=request.POST["recipiepk"]
+        recipie=ScrapRecipie.objects.filter(pk=recipie_pk)
+        recipie.delete()
+        return redirect("my_recipies")
+    else:
+        recipie_pk=request.GET["recipiepk"]
+        recipie=ScrapRecipie.objects.get(pk=recipie_pk)
+        print("GET request")
+        print(recipie.title)
+        return render(request, 'confirmdelete.html', {'recipie':recipie})
+    """print("inside delete recipies")
     recipie_pk=request.GET["recipiepk"]
     print(recipie_pk)
     recipie=ScrapRecipie.objects.filter(pk=recipie_pk)
     print("delete")
     print(recipie)
     recipie.delete()
-    return redirect("recipies_index")
+    return redirect("recipies_index")"""
 
 def logout(request):
     auth.logout(request)

@@ -45,7 +45,7 @@ class ScrapRecipie(models.Model):
         return self.title
 
 class comments(models.Model):
-    comment_info=models.TextField()
+    comment_info=models.TextField(verbose_name="")
     comment_date=models.DateField(auto_now_add=True)
     recipie=models.ForeignKey(ScrapRecipie,on_delete=models.CASCADE,null=True,blank=True)
     

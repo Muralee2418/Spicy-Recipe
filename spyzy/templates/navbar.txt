@@ -1,0 +1,22 @@
+
+
+<div class="container">
+<div class="title-row">
+<h1 style="font-family:Lato thin; font-weight:10">Spicy Recipies</h1>
+<div> 
+<ul>
+{% if user.is_authenticated %}
+<li>
+<p>Hello {{user.username}}</p>
+</li>
+<li><a href="accounts/logout">Logout</a></li>
+<li><a href="accounts/wishlist">Wishlist</a></li>
+<li><a href="create">Create Recipie</a></li>
+<li><a href="myrecipies">My Recipies</a></li>
+{% else %}
+<li><a href="accounts/register">Register</a></li>
+<li><a href="accounts/login">Login</a></li>
+{% endif %}
+</ul>
+</div> 
+</div>
