@@ -1,1 +1,1 @@
-web: gunicorn crm1.wsgi --log-file -
+web: gunicorn spyzy.wsgi
