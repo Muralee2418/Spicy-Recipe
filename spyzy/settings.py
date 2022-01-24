@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-59co64#255(7(0*q9c1ac%x^jtnoncmal92q!u_v9*)v$iu58!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['spizy-recipes.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['https://spizy-recipes.herokuapp.com','localhost','127.0.0.1']
 
 
 # Application definition
